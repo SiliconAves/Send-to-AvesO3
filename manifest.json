@@ -1,0 +1,34 @@
+{
+  "manifest_version": 2,
+  "name": "AvesO3",
+  "version": "0.1.0",
+  "description": "Send AO3 fics directly to your AvesO3 device.",
+
+  "icons": {
+    "48": "icons/icon48.png",
+    "96": "icons/icon96.png"
+  },
+
+  "content_scripts": [
+  {
+    "matches": [
+      "https://archiveofourown.org/works/*",
+      "https://archiveofourown.org/works?*",
+      "https://archiveofourown.org/users/*",
+      "https://archiveofourown.org/tags/*",
+      "https://archiveofourown.gay/works/*",
+      "https://archiveofourown.gay/works?*",
+      "https://archiveofourown.gay/users/*",
+      "https://archiveofourown.gay/tags/*"
+    ],
+    "js": ["content_script.js"]
+  }
+],
+
+  "permissions": [
+    "storage",
+    "https://archiveofourown.org/*",
+    "https://archiveofourown.gay/*",
+    "http://crosspoint.local/*"
+  ]
+}
