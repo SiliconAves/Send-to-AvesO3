@@ -7,7 +7,7 @@ const KEY_SAVED       = 'savedFolders';
 const KEY_RECENT      = 'recentFolders';
 const KEY_TREE        = 'folderTree';
 
-const DEVICE_URL  = 'http://crosspoint.local';
+const DEVICE_URL  = 'http://192.168.1.3';
 const MAX_RECENT  = 3;
 const MAX_SAVED   = 10;
 
@@ -57,12 +57,13 @@ async function init() {
   checkConnection();
 }
 
-// ── Connection check ──
+// ── Connection check — 
 async function checkConnection() {
   setConnectionState('checking');
   try {
-    const res = await fetch(`${DEVICE_URL}/api/status`,
-      { signal: AbortSignal.timeout(3000) });
+    const res = await fetch(`${DEVICE_URL}/api/status`, {
+      signal: AbortSignal.timeout(3000)
+    });
     setConnectionState(res.ok ? 'connected' : 'offline');
   } catch {
     setConnectionState('offline');
@@ -75,17 +76,21 @@ function setConnectionState(state) {
   connectionLabel.textContent = labels[state];
 }
 
-// ── Mock fetch — remove when using real device ──
+// ── Fetch directory from device — 
 async function fetchDirectory(path) {
-  await new Promise(r => setTimeout(r, 300));
-  const mock = {
-    '/':           [{ name: 'Fanfiction', isDirectory: true }, { name: 'Books', isDirectory: true }, { name: 'Documents', isDirectory: true }],
-    '/Fanfiction': [{ name: 'Completed', isDirectory: true }, { name: 'To Read', isDirectory: true }],
-    '/Books':      [{ name: 'Fantasy', isDirectory: true }]
-  };
+  const res = await fetch(
+    `${DEVICE_URL}/api/files?path=${encodeURIComponent(path)}`,
+    { signal: AbortSignal.timeout(8000) }
+  );
+  if (!res.ok) throw new Error(`Server returned ${res.status}`);
+
+  const entries = await res.json();
+
   const node = {};
-  for (const e of (mock[path] ?? [])) {
-    if (e.isDirectory) node[e.name] = {};
+  for (const entry of entries) {
+    if (entry.isDirectory) {
+      node[entry.name] = {};
+    }
   }
   return node;
 }
