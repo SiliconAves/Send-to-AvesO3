@@ -39,6 +39,7 @@
 
   "permissions": [
   "storage",
+  "tabs",
   "https://archiveofourown.org/*",
   "https://*.archiveofourown.org/*",
   "https://archiveofourown.gay/*",
