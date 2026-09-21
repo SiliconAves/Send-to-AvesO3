@@ -1,5 +1,5 @@
 // ── Constants ──
-const DEVICE_URL = 'http://crosspoint.local';
+const DEVICE_URL = 'http://192.168.1.3';
 
 // ── Sent tracking (persists until page reload) ──
 const sentThisSession = new Set();
@@ -9,27 +9,18 @@ async function sendToDevice(epubHref, filenameHint, linkElement, destinationPath
   linkElement.textContent = '🐦 Sending…';
 
   try {
-    const response = await fetch(epubHref);
-    if (!response.ok) throw new Error(`AO3 returned ${response.status}`);
-    const blob = await response.blob();
-
-    const disposition = response.headers.get('content-disposition');
-    let filename = filenameHint;
-    if (disposition) {
-      const match = disposition.match(/filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/);
-      if (match) filename = match[1].replace(/['"]/g, '');
-    }
-
-    const form = new FormData();
-    form.append('file', blob, filename);
-
     const path = destinationPath ?? '/';
-    const upload = await fetch(
-      `${DEVICE_URL}/upload?path=${encodeURIComponent(path)}&overwrite=true`,
-      { method: 'POST', body: form }
-    );
 
-    if (!upload.ok) throw new Error(`Device returned ${upload.status}`);
+    // Delegate EVERYTHING to the background script
+    const upload = await browser.runtime.sendMessage({
+      type: 'SEND_TO_DEVICE',
+      deviceUrl: DEVICE_URL, 
+      epubHref: epubHref,
+      filename: filenameHint,
+      path: path
+    });
+
+    if (!upload.ok) throw new Error(upload.error || 'Background upload failed');
 
     if (path !== '/') {
       await addToRecent(path);
