@@ -7,7 +7,7 @@ const KEY_SAVED       = 'savedFolders';
 const KEY_RECENT      = 'recentFolders';
 const KEY_TREE        = 'folderTree';
 
-const DEVICE_URL  = 'http://192.168.1.3';
+const DEVICE_URL  = 'http://crosspoint.local/';
 const MAX_RECENT  = 3;
 const MAX_SAVED   = 10;
 
@@ -61,7 +61,7 @@ async function init() {
 async function checkConnection() {
   setConnectionState('checking');
   try {
-    const res = await fetch(`${DEVICE_URL}/api/status`, {
+    const res = await fetch(`${DEVICE_URL}api/status`, {
       signal: AbortSignal.timeout(3000)
     });
     setConnectionState(res.ok ? 'connected' : 'offline');
@@ -79,7 +79,7 @@ function setConnectionState(state) {
 // ── Fetch directory from device — 
 async function fetchDirectory(path) {
   const res = await fetch(
-    `${DEVICE_URL}/api/files?path=${encodeURIComponent(path)}`,
+    `${DEVICE_URL}api/files?path=${encodeURIComponent(path)}`,
     { signal: AbortSignal.timeout(8000) }
   );
   if (!res.ok) throw new Error(`Server returned ${res.status}`);

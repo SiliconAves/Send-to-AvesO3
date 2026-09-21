@@ -28,7 +28,7 @@ async function handleDeviceUpload(msg) {
     const formData = new FormData();
     formData.append('file', blob, filename);
 
-    const uploadRes = await fetch(`${msg.deviceUrl}/upload?path=${encodeURIComponent(msg.path)}&overwrite=true`, {
+    const uploadRes = await fetch(`${msg.deviceUrl}upload?path=${encodeURIComponent(msg.path)}&overwrite=true`, {
       method: 'POST',
       body: formData,
       signal: AbortSignal.timeout(15000)

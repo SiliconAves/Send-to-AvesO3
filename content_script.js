@@ -1,5 +1,5 @@
 // ── Constants ──
-const DEVICE_URL = 'http://192.168.1.3';
+const DEVICE_URL = 'http://crosspoint.local/';
 
 // ── Sent tracking (persists until page reload) ──
 const sentThisSession = new Set();
