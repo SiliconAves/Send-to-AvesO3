@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AvesO3</title>
+  <title>Send to AvesO3</title>
+  <link href="https://fonts.googleapis.com/css2?family=Gelasio:wght@500&display=swap" rel="stylesheet">
   <style>
     * {
       box-sizing: border-box;
@@ -16,7 +17,8 @@
       font-family: Arial, Helvetica, sans-serif;
       font-size: 14px;
       color: #2a2a2a;
-      background: #f0ede8;
+      background: #EAEAEA;
+      overflow: hidden;
     }
 
     /* ── Header ── */
@@ -24,15 +26,28 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 16px;
-      background: #2a2a2a;
-      color: #f0ede8;
+      padding: 15px 16px;
+      background: #ffffff;;
+      color: #9D0000;
+      border-bottom: 2px solid #A6A6A6;
+    }
+
+    .title-group {
+      display: flex;
+      align-items: center;
+      gap: 8px; 
+    }
+
+    .header-icon {
+      width: 27px; 
+      height: 27px;
+      object-fit: contain;
     }
 
     .header-title {
-      font-size: 16px;
-      font-weight: bold;
-      letter-spacing: 0.5px;
+      font-family: 'Gelasio', serif;
+      font-size: 19px;
+      font-weight: Medium;
     }
 
     .connection-status {
@@ -53,17 +68,19 @@
       flex-shrink: 0;
     }
 
-    .status-connected .connection-label,
-    .status-connected .connection-dot { color: #4caf50; background: #4caf50; }
-    .status-offline .connection-label,
-    .status-offline .connection-dot   { color: #e53935; background: #e53935; }
-    .status-checking .connection-label,
-    .status-checking .connection-dot  { color: #fb8c00; background: #fb8c00; }
+    .status-connected .connection-label { color: #4caf50; }
+    .status-connected .connection-dot   { background: #4caf50; }
+    
+    .status-offline .connection-label { color: #e53935; }
+    .status-offline .connection-dot   { background: #e53935; }
+    
+    .status-checking .connection-label { color: #fb8c00; }
+    .status-checking .connection-dot  { background: #fb8c00; }
 
     /* ── Section ── */
     .section {
       padding: 14px 16px;
-      border-bottom: 1px solid #cbcbcb;
+      border-bottom: 0.93px solid #A7A7A7;
     }
 
     /* ── Switch row ── */
@@ -139,13 +156,11 @@
       line-height: 1.5;
     }
 
-    /* ── Saved / Recent ── */
+    /* ── Pinned / Recent ── */
     .list-section-title {
-      font-size: 11px;
+      font-size: 12px;
       font-weight: bold;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      color: #900;
+      color: #272727;
       margin-bottom: 6px;
     }
 
@@ -190,18 +205,19 @@
     /* ── Fetch button ── */
     .fetch-btn {
       width: 100%;
-      padding: 9px;
-      background: #2a2a2a;
+      padding: 12px 16px;
+      background: #970000;
       color: #f0ede8;
       border: none;
-      border-radius: 6px;
-      font-size: 13px;
+      font-family: 'Gelasio', serif;
+      font-weight: 500;
+      font-size: 14px;
       cursor: pointer;
       text-align: center;
       transition: background 0.15s;
     }
 
-    .fetch-btn:hover { background: #444; }
+    .fetch-btn:hover { background: #720202; }
     .fetch-btn:disabled { background: #aaa; cursor: default; }
 
     /* ── Breadcrumb ── */
@@ -209,9 +225,9 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      padding: 12px 16px;
-      background: #e4e0db;
-      border-bottom: 1px solid #cbcbcb;
+      padding: 8px 16px;
+      background: #dddddd;
+      border-bottom: 0.4px solid #D2D2D2;
       min-height: 48px;
     }
 
@@ -256,12 +272,12 @@
       display: flex;
       align-items: center;
       padding: 9px 16px;
-      border-bottom: 1px solid #e8e4df;
+      border-bottom: 0.4px solid #D2D2D2;
       gap: 10px;
       cursor: pointer;
     }
 
-    .folder-item:hover { background: #e4e0db; }
+    .folder-item:hover { background: #dddddd; }
 
     .folder-item .folder-icon {
       font-size: 16px;
@@ -294,9 +310,12 @@
 
   <!-- Header -->
   <div class="header">
-    <span class="header-title">🐦 AvesO3</span>
+    <div class="title-group">
+      <img src="icons/icon48.png" alt="AvesO3" class="header-icon">
+      <span class="header-title">Send to AvesO3</span>
+    </div>
     <div class="connection-status" id="connectionStatus">
-      <span class="connection-label" id="connectionLabel">Checking…</span>
+      <span class="connection-label" id="connectionLabel">Checking</span>
       <div class="connection-dot" id="connectionDot"></div>
     </div>
   </div>
@@ -315,31 +334,26 @@
     </div>
     </div>
     <p class="mode-message" id="modeMessage">
-      Fics will be sent to the root folder of your device.
+      Fics will be sent to the root folder.
     </p>
   </div>
 
   <!-- Folder mode panel -->
   <div id="folderPanel" class="hidden">
 
-    <!-- Saved + Recent -->
+    <!-- Pinned + Recent -->
     <div class="section">
-      <div class="list-section-title">Saved</div>
+      <div class="list-section-title">Pinned Folders</div>
       <div id="savedList">
-        <p class="empty-hint">No saved folders yet. Pin a folder below.</p>
+        <p class="empty-hint">No pinned folders yet.</p>
       </div>
 
       <div style="margin-top: 12px;">
-        <div class="list-section-title">Recent</div>
+        <div class="list-section-title">Recent Folders</div>
         <div id="recentList">
           <p class="empty-hint">No recent folders yet.</p>
         </div>
       </div>
-    </div>
-
-    <!-- Fetch button -->
-    <div class="section">
-      <button class="fetch-btn" id="fetchBtn">↓ Fetch folder structure</button>
     </div>
 
     <!-- Folder browser -->
@@ -360,6 +374,9 @@
       <ul class="folder-list" id="folderList"></ul>
 
     </div>
+
+    <!-- Fetch button -->
+      <button class="fetch-btn" id="fetchBtn">⟳ Fetch Folders from Device</button>
 
   </div>
 

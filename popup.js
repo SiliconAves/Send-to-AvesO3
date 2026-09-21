@@ -72,7 +72,7 @@ async function checkConnection() {
 
 function setConnectionState(state) {
   connectionStatus.className = 'connection-status status-' + state;
-  const labels = { connected: 'Connected', offline: 'Offline', checking: 'Checking…' };
+  const labels = { connected: 'Connected', offline: 'Offline', checking: 'Checking' };
   connectionLabel.textContent = labels[state];
 }
 
@@ -107,7 +107,7 @@ function applyMode(on) {
   toggleStateLabel.className   = 'toggle-state-label' + (on ? ' on' : '');
   modeMessage.textContent = on
     ? 'Fics will be sent to your chosen folder.'
-    : 'Fics will be sent to the root folder of your device.';
+    : 'Fics will be sent to the root folder.';
   folderPanel.classList.toggle('hidden', !on);
 }
 
@@ -322,7 +322,7 @@ function renderRecent() {
 
     const icon = document.createElement('span');
     icon.className   = 'entry-icon';
-    icon.textContent = '↺';
+    icon.textContent = '↻';
 
     const label = document.createElement('span');
     label.className   = 'entry-path';

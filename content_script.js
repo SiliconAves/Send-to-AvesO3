@@ -28,7 +28,7 @@ async function sendToDevice(epubHref, filenameHint, linkElement, destinationPath
 
     sentThisSession.add(epubHref);
     linkElement.textContent = '🐦 Sent ✓';
-    linkElement.style.cssText = 'opacity: 0.6; cursor: default;';
+    linkElement.style.cssText = 'color: #16531a; opacity: 0.6; cursor: default;';
 
   } catch (err) {
     console.error('[AvesO3]', err);
@@ -95,9 +95,9 @@ async function showDropdown(anchorElement, epubHref, filenameHint, buttonElement
   dropdown.style.cssText = `
     position: absolute;
     z-index: 99999;
-    background: #f0ede8;
+    background: #eaeaea;
     border: 1px solid #cbcbcb;
-    border-radius: 6px;
+    border-radius: 3px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     min-width: 240px;
     font-family: Arial, Helvetica, sans-serif;
@@ -118,11 +118,10 @@ async function showDropdown(anchorElement, epubHref, filenameHint, buttonElement
       gap: 8px;
       padding: 9px 14px;
       cursor: pointer;
-      border-bottom: 1px solid #e8e4df;
       white-space: nowrap;
       overflow: hidden;
     `;
-    row.addEventListener('mouseenter', () => row.style.background = '#e4e0db');
+    row.addEventListener('mouseenter', () => row.style.background = '#dddddd');
     row.addEventListener('mouseleave', () => row.style.background = '');
 
     const iconSpan = document.createElement('span');
@@ -145,7 +144,7 @@ async function showDropdown(anchorElement, epubHref, filenameHint, buttonElement
 
   function makeSeparator() {
     const sep = document.createElement('div');
-    sep.style.cssText = 'height: 1px; background: #cbcbcb; margin: 2px 0;';
+    sep.style.cssText = 'height: 0.4px; background: #cbcbcb; margin: 0;';
     return sep;
   }
 
@@ -163,7 +162,7 @@ async function showDropdown(anchorElement, epubHref, filenameHint, buttonElement
   if (recentFolders.length > 0) {
     if (hasContent) dropdown.appendChild(makeSeparator());
     for (const path of recentFolders) {
-      dropdown.appendChild(makeRow('↺', path, () => {
+      dropdown.appendChild(makeRow('↻', path, () => {
         sendToDevice(epubHref, filenameHint, buttonElement, path);
       }));
     }
@@ -177,7 +176,10 @@ async function showDropdown(anchorElement, epubHref, filenameHint, buttonElement
     dropdown.appendChild(hint);
   }
 
-  dropdown.appendChild(makeSeparator());
+  const selectFolderSep = makeSeparator();
+  selectFolderSep.style.height = '1.3px';
+  selectFolderSep.style.background = '#A6A6A6';
+  dropdown.appendChild(selectFolderSep);
   dropdown.appendChild(makeRow('📂', 'Select Folder', () => {
     openFolderBrowser(epubHref, filenameHint, buttonElement, anchorElement);
   }));
@@ -221,9 +223,9 @@ async function openFolderBrowser(epubHref, filenameHint, buttonElement, anchorEl
   panel.style.cssText = `
     position: absolute;
     z-index: 99999;
-    background: #f0ede8;
+    background: #eaeaea;
     border: 1px solid #cbcbcb;
-    border-radius: 6px;
+    border-radius: 3px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     width: 300px;
     font-family: Arial, Helvetica, sans-serif;
@@ -245,10 +247,11 @@ async function openFolderBrowser(epubHref, filenameHint, buttonElement, anchorEl
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 12px 14px;
-    background: #e4e0db;
-    border-bottom: 1px solid #cbcbcb;
+    padding: 8px 16px;
+    background: #dddddd;
+    border-bottom: 0.4px solid #D2D2D2;
     min-height: 48px;
+    box-sizing: border-box;
   `;
 
   const backBtn = document.createElement('button');
@@ -299,14 +302,19 @@ async function openFolderBrowser(epubHref, filenameHint, buttonElement, anchorEl
   const sendHereBtn = document.createElement('button');
   sendHereBtn.style.cssText = `
     width: 100%;
-    padding: 12px;
+    padding: 18px;
     background: #900;
     color: white;
     border: none;
     font-size: 14px;
     font-weight: bold;
     cursor: pointer;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    margin: 0;
+    line-height: 1;
     flex-shrink: 0;
     letter-spacing: 0.3px;
   `;
@@ -358,10 +366,10 @@ async function openFolderBrowser(epubHref, filenameHint, buttonElement, anchorEl
         align-items: center;
         gap: 10px;
         padding: 10px 14px;
-        border-bottom: 1px solid #e8e4df;
+        border-bottom: 1px solid #D2D2D2;
         cursor: pointer;
       `;
-      row.addEventListener('mouseenter', () => row.style.background = '#e4e0db');
+      row.addEventListener('mouseenter', () => row.style.background = '#dddddd');
       row.addEventListener('mouseleave', () => row.style.background = '');
 
       const folderIcon = document.createElement('span');
