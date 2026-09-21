@@ -328,8 +328,28 @@ function renderRecent() {
     label.className   = 'entry-path';
     label.textContent = path;
 
+    const removeBtn = document.createElement('button');
+    removeBtn.className   = 'entry-remove';
+    removeBtn.textContent = '✕';
+    removeBtn.title       = 'Remove from recent';
+
+    removeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      e.preventDefault();
+
+      recentFolders = recentFolders.filter(p => p !== path);
+      browserAPI.storage.local.set({ [KEY_RECENT]: recentFolders });
+
+      row.remove();
+
+      if (recentFolders.length === 0) {
+        recentList.innerHTML = '<p class="empty-hint">No recent folders yet.</p>';
+      }
+    });
+
     row.appendChild(icon);
     row.appendChild(label);
+    row.appendChild(removeBtn);
     recentList.appendChild(row);
   }
 }

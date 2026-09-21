@@ -52,7 +52,12 @@ async function getDestinationData() {
 }
 
 async function addToRecent(path) {
-  const data = await browser.storage.local.get('recentFolders');
+  const data = await browser.storage.local.get(['recentFolders', 'savedFolders']);
+  
+  // Don't add to recent if it's already a pinned folder
+  const saved = data.savedFolders ?? [];
+  if (saved.includes(path)) return;
+
   let recent = data.recentFolders ?? [];
   recent = recent.filter(p => p !== path);
   recent.unshift(path);
