@@ -349,6 +349,12 @@ async function openFolderBrowser(epubHref, filenameHint, buttonElement, anchorEl
     backBtn.style.color  = browserPath.length === 0 ? '#bbb' : '#2a2a2a';
     backBtn.style.cursor = browserPath.length === 0 ? 'default' : 'pointer';
 
+    // Dynamic send label
+    const currentFolder = browserPath.length === 0
+      ? 'root'
+      : browserPath[browserPath.length - 1];
+    sendHereBtn.textContent = `⬆ Send to ${currentFolder}`;
+
     folderList.innerHTML = '';
     const node  = getCurrentNode();
     const names = Object.keys(node).sort();
