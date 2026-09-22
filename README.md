@@ -18,7 +18,7 @@ with a single click.
 - Firefox desktop
 - AvesO3 fork installed on your xteink x3/x4
 - eReader and browser on the same WiFi network
-- http://crosspoint.local added to HTTPS-Only Exceptions <-- IMPORTANT 
+- http://crosspoint.local **added to HTTPS-Only Exceptions <-- IMPORTANT**
 
 ## Setup
 
