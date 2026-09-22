@@ -30,10 +30,7 @@ async function checkAndBadge(tabId) {
   setBadge('checking', tabId);
 
   try {
-    let host = typeof discoverDevice === 'function' ? await discoverDevice() : 'crosspoint.local';
-    if (!host) host = 'crosspoint.local';
-
-    const cleanHost = host.replace(/^https?:\/\//, '').replace(/\/$/, '');
+    const cleanHost = 'crosspoint.local';
     const res = await fetch(`http://${cleanHost}/api/status`, {
       signal: AbortSignal.timeout(3000)
     });
