@@ -6,11 +6,11 @@ with a single click.
 ## Features
 
 - **One-click transfer** from any AO3 work page 
-- **Locked fic support** — uses your existing browser session
-- **Folder mode** — browse your device's folder structure and send to any folder
+- **Locked fic support**: uses your existing browser session
+- **Folder mode**: browse your device's folder structure and send to any folder
 - **Pin folders** for quick access to your most-used destinations
-- **Auto-discovery** — finds your device automatically on the local network
-- **Connection indicator** — badge on the toolbar icon shows device status when browsing AO3
+- **Auto-discovery**: finds your device automatically on the local network
+- **Connection indicator**: badge on the toolbar icon shows device status when browsing AO3
 - Supports **archiveofourown.org** and **archiveofourown.gay**
 
 ## Requirements
