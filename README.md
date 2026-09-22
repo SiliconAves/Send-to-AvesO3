@@ -16,7 +16,7 @@ with a single click.
 ## Requirements
 
 - Firefox desktop
-- AvesO3 fork installed on your xteink x3/x4
+- AvesO3 1.5 and up installed on your xteink x3/x4
 - eReader and browser on the same WiFi network
 - http://crosspoint.local **added to HTTPS-Only Exceptions <-- IMPORTANT**
 
