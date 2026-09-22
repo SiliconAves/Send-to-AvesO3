@@ -45,5 +45,14 @@
   "https://archiveofourown.gay/*",
   "https://*.archiveofourown.gay/*",
   "http://crosspoint.local/*"
-]
+],
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "aveso3-extension@siliconaves.com",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
+    }
+  }
 }
