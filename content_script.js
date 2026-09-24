@@ -192,11 +192,11 @@ async function showDropdown(anchorElement, epubHref, filenameHint, buttonElement
   document.body.appendChild(dropdown);
   activeDropdown = dropdown;
 
-  // Clamp horizontal position if near right edge
+  // Clamp horizontal position
   const dropRect = dropdown.getBoundingClientRect();
-  if (dropRect.right > window.innerWidth) {
-    dropdown.style.left = Math.max(0, window.innerWidth - dropRect.width - 8) + 'px';
-  }
+  const anchorRect = anchorElement.getBoundingClientRect();
+  const alignedLeft = anchorRect.right - dropRect.width;
+  dropdown.style.left = Math.max(8, alignedLeft) + 'px';
 
   // ── Outside click — correctly references dropdown, not panel ──
   let dropTouchMoved = false;
@@ -465,6 +465,12 @@ async function openFolderBrowser(epubHref, filenameHint, buttonElement, anchorEl
     const currentTop = parseInt(panel.style.top);
     panel.style.top = Math.max(currentTop - overflow - 8, window.scrollY + 4) + 'px';
   }
+  // Clamp horizontal position
+  const panelRectH = panel.getBoundingClientRect();
+  const anchorRectH = anchorElement.getBoundingClientRect();
+  const alignedLeft = anchorRectH.right - panelRectH.width;
+  panel.style.left = Math.max(8, alignedLeft) + 'px';
+
 
   // ── Outside click — correctly references panel ──
   let panelTouchMoved = false;

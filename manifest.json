@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Send to AvesO3",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Send AO3 fics directly to your AvesO3 device.",
 
   "icons": {
