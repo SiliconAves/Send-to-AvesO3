@@ -15,7 +15,7 @@ with a single click.
 
 ## Requirements
 
-- Firefox desktop
+- Firefox desktop or Firefox Nightly for Android
 - AvesO3 1.5 and up installed on your xteink x3/x4
 - eReader and browser on the same WiFi network
 - http://crosspoint.local **added to HTTPS-Only Exceptions <-- IMPORTANT**
@@ -23,7 +23,7 @@ with a single click.
 ## Setup
 
 > [!IMPORTANT]
-> Remember to set http://crosspoint.local as an exception to Firefox HTTPS-Only mode.
+> Remember to set http://crosspoint.local as an exception to Firefox HTTPS-Only mode. If you are on Firefox Nightly for Android, turn off HTTPS mode.
 
 1. On your AvesO3 device, open **File Transfer** → **AvesO3 Receive**
 2. The extension icon badge will turn **green** when your device is detected. Reload the page to update the connection status. 
