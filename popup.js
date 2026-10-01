@@ -354,27 +354,5 @@ function renderRecent() {
   }
 }
 
-// ── Message listener for content script ──
-browserAPI.runtime.onMessage.addListener((msg, sender, sendResponse) => {
-  if (msg.type === 'ADD_RECENT') {
-    const path = msg.path;
-    recentFolders = recentFolders.filter(p => p !== path);
-    recentFolders.unshift(path);
-    if (recentFolders.length > MAX_RECENT) recentFolders.pop();
-    browserAPI.storage.local.set({ [KEY_RECENT]: recentFolders });
-    sendResponse({ ok: true });
-  }
-
-  if (msg.type === 'GET_DESTINATION') {
-    browserAPI.storage.local.get([KEY_FOLDER_MODE, KEY_SAVED, KEY_RECENT])
-      .then(data => sendResponse({
-        folderMode:    data[KEY_FOLDER_MODE] ?? false,
-        savedFolders:  data[KEY_SAVED]       ?? [],
-        recentFolders: data[KEY_RECENT]      ?? []
-      }));
-    return true; // keep channel open for async response
-  }
-});
-
 // ── Start ──
 init();
