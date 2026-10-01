@@ -108,6 +108,10 @@ async function handleDeviceUpload(msg) {
       if (match) filename = match[1].replace(/['"]/g, '');
     }
     blob = await ao3Res.blob();
+    const head = new Uint8Array(await blob.slice(0, 2).arrayBuffer());
+    if (head[0] !== 0x50 || head[1] !== 0x4B) {
+      throw new Error('Could not download a valid EPUB file.)');
+    }
   } catch (err) {
     return { ok: false, error: 'AO3 Download Failed: ' + err.message };
   }
