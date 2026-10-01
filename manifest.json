@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Send to AvesO3",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Send AO3 fics directly to your AvesO3 device.",
 
   "icons": {
@@ -28,10 +28,12 @@
       "https://archiveofourown.org/works?*",
       "https://archiveofourown.org/users/*",
       "https://archiveofourown.org/tags/*",
+      "https://archiveofourown.org/series/*",
       "https://archiveofourown.gay/works/*",
       "https://archiveofourown.gay/works?*",
       "https://archiveofourown.gay/users/*",
-      "https://archiveofourown.gay/tags/*"
+      "https://archiveofourown.gay/tags/*",
+      "https://archiveofourown.gay/series/*"
     ],
     "js": ["content_script.js"]
   }
@@ -39,7 +41,6 @@
 
   "permissions": [
   "storage",
-  "tabs",
   "https://archiveofourown.org/*",
   "https://*.archiveofourown.org/*",
   "https://archiveofourown.gay/*",
