@@ -61,3 +61,7 @@ By default, fics are sent to the root folder of your device. To organise your ep
 3. Click **Fetch Folders from Device** (device must be in receive mode)
 4. Browse your folder structure and **pin your favourite destinations**
 5. The send button will show a **dropdown** with your pinned and recent folders
+
+---
+---
+**This is NOT an official AO3 tool. It is NOT affiliated with the OTW / Archive of Our Own organization and is intented for personal use.**
