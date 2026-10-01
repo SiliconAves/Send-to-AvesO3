@@ -227,6 +227,7 @@ async function openFolderBrowser(epubHref, filenameHint, buttonElement, anchorEl
   const tree = data.folderTree ?? {};
 
   let browserPath = [];
+  let loadingFolder = false;
 
   const panel = document.createElement('div');
   panel.id = 'aveso3-browser';
@@ -408,11 +409,51 @@ async function openFolderBrowser(epubHref, filenameHint, buttonElement, anchorEl
         flex-shrink: 0;
       `;
 
-      // Navigate into folder
-      row.addEventListener('click', (e) => {
-        if (e.target === pinBtn) return;
+      // Navigate into folder (loads its subfolders from the device if not cached)
+      row.addEventListener('click', async (e) => {
+        if (e.target === pinBtn || loadingFolder) return;
         browserPath.push(name);
         renderBrowser();
+
+        // Already know this folder's children? Done.
+        if (Object.keys(getCurrentNode()).length > 0) return;
+
+        const targetPath = [...browserPath];   // snapshot in case the user navigates away
+        loadingFolder = true;
+        folderList.innerHTML = '';
+        const loading = document.createElement('div');
+        loading.style.cssText = 'padding: 14px; color: #999; font-style: italic; font-size: 13px;';
+        loading.textContent = 'Loading…';
+        folderList.appendChild(loading);
+
+        let res;
+        try {
+          res = await browser.runtime.sendMessage({
+            type: 'LIST_FOLDERS',
+            path: '/' + targetPath.join('/')
+          });
+        } catch (err) {
+        res = { ok: false };
+        }
+        loadingFolder = false;
+
+        if (res?.ok) {
+          let parent = tree;
+          for (let i = 0; i < targetPath.length - 1; i++) {
+            parent = parent[targetPath[i]] ??= {};
+          }
+          parent[targetPath[targetPath.length - 1]] =
+            Object.fromEntries(res.folders.map(f => [f, {}]));
+          browser.storage.local.set({ folderTree: tree });
+          renderBrowser();
+        } else {
+          renderBrowser();
+          folderList.innerHTML = '';
+          const err = document.createElement('div');
+          err.style.cssText = 'padding: 14px; color: #900; font-size: 13px;';
+          err.textContent = 'Could not load folders. Is receive mode on?';
+          folderList.appendChild(err);
+        }
       });
 
       // Pin / unpin

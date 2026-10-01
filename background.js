@@ -1,7 +1,11 @@
 browser.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.type === 'SEND_TO_DEVICE') {
     handleDeviceUpload(msg).then(sendResponse);
-    return true; 
+    return true;
+  }
+  if (msg.type === 'LIST_FOLDERS') {
+    listFolders(msg.path).then(sendResponse);
+    return true;
   }
 });
 
@@ -94,6 +98,21 @@ browser.windows.onFocusChanged.addListener(async (windowId) => {
   } catch (err) {}
 });
 
+async function listFolders(path) {
+  try {
+    const res = await fetch(
+      `http://crosspoint.local/api/files?path=${encodeURIComponent(path)}`,
+      { signal: AbortSignal.timeout(8000) }
+    );
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const entries = await res.json();
+    const folders = entries.filter(e => e.isDirectory).map(e => e.name);
+    return { ok: true, folders };
+  } catch (err) {
+    return { ok: false, error: err.message };
+  }
+}
+
 async function handleDeviceUpload(msg) {
   let blob, filename = msg.filename;
 
@@ -110,7 +129,7 @@ async function handleDeviceUpload(msg) {
     blob = await ao3Res.blob();
     const head = new Uint8Array(await blob.slice(0, 2).arrayBuffer());
     if (head[0] !== 0x50 || head[1] !== 0x4B) {
-      throw new Error('Could not download a valid EPUB file.)');
+      throw new Error('Could not download a valid EPUB file.');
     }
   } catch (err) {
     return { ok: false, error: 'AO3 Download Failed: ' + err.message };
