@@ -3,9 +3,12 @@ const DEVICE_URL = 'http://crosspoint.local/';
 
 // ── Sent tracking (persists until page reload) ──
 const sentThisSession = new Set();
+const sendingNow = new Set();
 
 // ── Shared upload logic ──
 async function sendToDevice(epubHref, filenameHint, linkElement, destinationPath) {
+  if (sendingNow.has(epubHref)) return;
+  sendingNow.add(epubHref);
   linkElement.textContent = '🐦 Sending…';
 
   try {
@@ -41,6 +44,8 @@ async function sendToDevice(epubHref, filenameHint, linkElement, destinationPath
         linkElement.style.cssText = '';
       });
     }, 4000);
+  } finally {
+    sendingNow.delete(epubHref);
   }
 }
 
