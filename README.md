@@ -9,7 +9,7 @@ with a single click.
 - **Locked fic support**: uses your existing browser session
 - **Folder mode**: browse your device's folder structure and send to any folder
 - **Pin folders** for quick access to your most-used destinations
-- **Auto-discovery**: finds your device automatically on the local network
+- **Connect to crosspoint.local**: connects to your device on your local network
 - **Connection indicator**: badge on the toolbar icon shows device status when browsing AO3
 - Supports **archiveofourown.org** and **archiveofourown.gay**
 
@@ -61,3 +61,7 @@ By default, fics are sent to the root folder of your device. To organise your ep
 3. Click **Fetch Folders from Device** (device must be in receive mode)
 4. Browse your folder structure and **pin your favourite destinations**
 5. The send button will show a **dropdown** with your pinned and recent folders
+
+---
+---
+**This is NOT an official AO3 tool. It is NOT affiliated with the OTW / Archive of Our Own organization and is intended for personal use.**

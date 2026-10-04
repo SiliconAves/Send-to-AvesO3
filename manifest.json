@@ -1,57 +1,54 @@
 {
   "manifest_version": 2,
   "name": "Send to AvesO3",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Send AO3 fics directly to your AvesO3 device.",
-
   "icons": {
     "48": "icons/icon48.png",
     "96": "icons/icon96.png"
   },
-
   "browser_action": {
-  "default_popup": "popup.html",
-  "default_icon": {
-    "48": "icons/icon48.png",
-    "96": "icons/icon96.png"
+    "default_popup": "popup.html",
+    "default_icon": {
+      "48": "icons/icon48.png",
+      "96": "icons/icon96.png"
     }
   },
-
   "background": {
-    "scripts": ["background.js"]
+    "scripts": [
+      "background.js"
+    ]
   },
-
   "content_scripts": [
-  {
-    "matches": [
-      "https://archiveofourown.org/works/*",
-      "https://archiveofourown.org/works?*",
-      "https://archiveofourown.org/users/*",
-      "https://archiveofourown.org/tags/*",
-      "https://archiveofourown.gay/works/*",
-      "https://archiveofourown.gay/works?*",
-      "https://archiveofourown.gay/users/*",
-      "https://archiveofourown.gay/tags/*"
-    ],
-    "js": ["content_script.js"]
-  }
-],
-
+    {
+      "matches": [
+        "https://archiveofourown.org/works*",
+        "https://archiveofourown.org/users/*",
+        "https://archiveofourown.org/tags/*",
+        "https://archiveofourown.org/series/*",
+        "https://archiveofourown.gay/works*",
+        "https://archiveofourown.gay/users/*",
+        "https://archiveofourown.gay/tags/*",
+        "https://archiveofourown.gay/series/*"
+      ],
+      "js": [
+        "content_script.js"
+      ]
+    }
+  ],
   "permissions": [
-  "storage",
-  "tabs",
-  "https://archiveofourown.org/*",
-  "https://*.archiveofourown.org/*",
-  "https://archiveofourown.gay/*",
-  "https://*.archiveofourown.gay/*",
-  "http://crosspoint.local/*"
-],
-
+    "storage",
+    "https://archiveofourown.org/*",
+    "https://*.archiveofourown.org/*",
+    "https://archiveofourown.gay/*",
+    "https://*.archiveofourown.gay/*",
+    "http://crosspoint.local/*"
+  ],
   "browser_specific_settings": {
-    "gecko": {
-      "id": "aveso3-extension@siliconaves.com",
-      "data_collection_permissions": {
-        "required": ["none"]
+  "gecko": {
+    "id": "aveso3-extension@siliconaves.com",
+    "data_collection_permissions": {
+      "required": ["none"]
       }
     }
   }
