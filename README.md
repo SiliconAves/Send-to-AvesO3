@@ -48,7 +48,7 @@ with a single click.
 > [!IMPORTANT]
 > Remember to set http://crosspoint.local as an exception to Firefox HTTPS-Only mode.
 
-1. On your AvesO3 device, open **File Transfer** → **AvesO3 Receive** (Or set "Send to AvesO3" as the short power button action from Crosspoint settings)
+1. On your AvesO3 device, open **File Transfer** → **Send to AvesO3** (Or set "Send to AvesO3" as the short power button action from Crosspoint settings)
 2. The extension icon badge will turn **green** when your device is detected. Reload the page to update the connection status badge. 
 3. Navigate to any AO3 work and click **🐦 Send to AvesO3**.
 4. If you want to choose the folder, ensure you press "Fetch Folders from Device" at least once.
