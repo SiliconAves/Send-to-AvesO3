@@ -1,5 +1,8 @@
 # 🐦 Send to AvesO3
 
+> [!NOTE]
+> The extension can now be downloaded through the Firefox extension store at https://addons.mozilla.org/en-US/firefox/addon/send-to-aveso3/
+
 A Firefox extension that sends AO3 fanfiction directly to your AvesO3 e-reader 
 with a single click.
 
@@ -25,21 +28,19 @@ with a single click.
 > [!IMPORTANT]
 > Remember to turn off HTTPS-Only mode in Firefox settings. This setting on Android is global, you can't set an HTTPS-Only exception for crosspoint.local.
 
-1. **Download the latest .xpi** file from this GitHub release page
-2. On your Android phone, download and open Firefox Nightly. **Ensure HTTPS-Only mode is off in settings**
-3. Open the Settings menu and scroll **all the way to the bottom**
-4. Tap on **"About Firefox Nightly"**
-5. **Repeatedly tap** on the Firefox logo until debug menus activate
-6. Press Back. Under "Advanced" you should find **"Install extension from file"**
-7. Select the .xpi file you want to install and follow the installation prompt
+1. Go to https://addons.mozilla.org/en-US/firefox/addon/send-to-aveso3/
+2. On your phone, download and open Firefox. **Ensure HTTPS-Only mode is off in settings**
+3. Tap the three dots in the top right and tap on the **Extensions menu**
+4. Tap "Find more extensions" and type "Send to AvesO3" in the search bar
+5. Follow the installation prompts
 
 ## How to Install - Firefox Desktop
 
 > [!IMPORTANT]
 > Remember to set http://crosspoint.local as an exception to Firefox HTTPS-Only mode.
 
-1. **Download the latest .xpi** file from this GitHub release page
-2. Open the .xpi file and follow the installation prompt
+1. Go to https://addons.mozilla.org/en-US/firefox/addon/send-to-aveso3/
+2. Follow the installation prompts
 3. In the settings menu, set http://crosspoint.local as an HTTPS-Only exception
 
 ## How to Use
