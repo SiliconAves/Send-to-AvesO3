@@ -18,8 +18,8 @@ with a single click.
 
 ## Requirements
 
-- Firefox Desktop or Firefox Mobile
-- AvesO3 1.5 and up installed on your xteink x3/x4. Works with base Crosspoint too, but there won't be a dedicated screen with visual feedback for received files.
+- **Firefox Desktop or Firefox Mobile**
+- AvesO3 1.5 and up or CrossPoint installed on your xteink x3/x4. If you are using CrossPoint: use the **Calibre transfer method** to get visual feedback upon successful transfers.
 - eReader and browser on the same WiFi network
 - http://crosspoint.local **added to HTTPS-Only Exceptions <-- IMPORTANT**
 
