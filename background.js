@@ -117,8 +117,11 @@ async function handleDeviceUpload(msg) {
   let blob, filename = msg.filename;
 
   // --- PHASE 1: DOWNLOAD FROM AO3 ---
-  try {
-    const ao3Res = await fetch(msg.epubHref);
+    try {
+    const url = new URL(msg.epubHref);
+    url.searchParams.set('updated_at', Date.now());   // cache-buster
+
+    const ao3Res = await fetch(url.toString(), { cache: 'no-store' });
     if (!ao3Res.ok) throw new Error(`HTTP ${ao3Res.status}`);
     
     const disposition = ao3Res.headers.get('content-disposition');
